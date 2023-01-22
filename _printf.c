@@ -11,7 +11,7 @@ void print_buffer(char buffer[], int *buff_ind);
 int _printf(const char *format, ...)
 {
 	int i, printed = 0, printed_chars = 0;
-	int fans, widths, precisions, sizes, buff_ind = 0;
+	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
 
@@ -32,13 +32,13 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			fans = get_fans(format, &i);
-			widths = get_widths(format, &i, list);
-			precisions = get_precisions(format, &i, list);
-			sizes = get_sizes(format, &i);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
+			size = get_size(format, &i);
 			++i;
 			printed = handle_print(format, &i, list, buffer,
-				fans, widths, precisions, sizes);
+				flags, width, precision, size);
 			if (printed == -1)
 				return (-1);
 			printed_chars += printed;
